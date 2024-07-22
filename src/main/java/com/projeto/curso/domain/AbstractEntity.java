@@ -1,4 +1,4 @@
-package com.projeto.curso.web.domain;
+package com.projeto.curso.domain;
 
 import jakarta.persistence.*;
 
