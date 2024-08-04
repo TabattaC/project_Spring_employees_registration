@@ -10,4 +10,5 @@ public interface DepartamentoService {
     void excluir(long id);
     Departamento buscarPorId(Long id);
     List<Departamento> buscarTodos();
+    boolean departamentoTemcargo(Long id);
 }
