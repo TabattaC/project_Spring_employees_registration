@@ -1,6 +1,5 @@
-package com.projeto.curso;
+package com.projeto.curso.dao;
 
-import com.projeto.curso.dao.AbstractDao;
 import com.projeto.curso.domain.Funcionario;
 import org.springframework.stereotype.Repository;
 
