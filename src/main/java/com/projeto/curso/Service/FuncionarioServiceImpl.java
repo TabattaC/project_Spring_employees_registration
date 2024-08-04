@@ -1,6 +1,6 @@
 package com.projeto.curso.Service;
 
-import com.projeto.curso.FuncionarioDao;
+import com.projeto.curso.dao.FuncionarioDao;
 import com.projeto.curso.domain.Funcionario;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
