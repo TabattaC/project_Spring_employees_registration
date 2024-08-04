@@ -1,4 +1,4 @@
-package com.projeto.curso;
+package com.projeto.curso.dao;
 
 import com.projeto.curso.domain.Funcionario;
 
