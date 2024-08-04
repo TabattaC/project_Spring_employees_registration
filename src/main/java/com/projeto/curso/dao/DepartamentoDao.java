@@ -1,10 +1,10 @@
 package com.projeto.curso.dao;
 
 import com.projeto.curso.domain.Departamento;
-import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface DepartamentoDao {
     void save(Departamento entity);
 
