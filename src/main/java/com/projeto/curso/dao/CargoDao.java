@@ -1,8 +1,10 @@
 package com.projeto.curso.dao;
 
 import com.projeto.curso.domain.Cargo;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface CargoDao {
     void save(Cargo entity);
 
