@@ -14,6 +14,7 @@ public class CargoServiceImpl implements CargoService {
 
     @Autowired
     private CargoDao cargoDao;
+
     @Override
     public void salvar(Cargo cargo) {
         cargoDao.save(cargo);
@@ -39,5 +40,13 @@ public class CargoServiceImpl implements CargoService {
     @Transactional(readOnly = true)
     public List<Cargo> buscarTodos() {
         return cargoDao.findAll();
+    }
+
+    @Override
+    public boolean cargoTemFuncionarios(Long id){
+        if(buscarPorId(id).getFuncionarios().isEmpty()){
+            return false;
+        }
+        return true;
     }
 }

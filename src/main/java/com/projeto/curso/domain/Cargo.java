@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "CARGO")
+@SuppressWarnings("serial")
 public class Cargo extends AbstractEntity<Long> {
     @Column(name = "nome", nullable = false, unique = true, length = 60)
     private String nome;
@@ -14,6 +15,15 @@ public class Cargo extends AbstractEntity<Long> {
     private Departamento departamento;
     @OneToMany(mappedBy = "cargo")
     private List<Funcionario> funcionarios;
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
 
 
     public String getNome() {

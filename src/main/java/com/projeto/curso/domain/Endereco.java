@@ -2,6 +2,7 @@ package com.projeto.curso.domain;
 
 import jakarta.persistence.*;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "ENDERECOS")
 public class Endereco extends AbstractEntity<Long> {

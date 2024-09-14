@@ -1,20 +1,26 @@
 package com.projeto.curso.domain;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@SuppressWarnings("serial")
 @Table(name = "FUNCIONARIOS")
 public class Funcionario extends AbstractEntity<Long> {
     @Column(nullable = false, unique = true)
     private String nome;
     @Column(nullable = false, unique = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
+    @NumberFormat(style = NumberFormat.Style.CURRENCY,pattern = "#,##0.00")
     private BigDecimal salario;
     @Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataEntrada;
     @Column(name = "data_saida", columnDefinition = "DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataSaida;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id_fk")

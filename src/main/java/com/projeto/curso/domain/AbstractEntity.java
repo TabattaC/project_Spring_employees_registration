@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 @MappedSuperclass
+@SuppressWarnings("serial")
 public abstract class AbstractEntity<ID extends Serializable> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

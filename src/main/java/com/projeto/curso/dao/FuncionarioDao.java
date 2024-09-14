@@ -15,4 +15,6 @@ public interface FuncionarioDao {
     Funcionario findById(Long id);
 
     public List<Funcionario> findAll();
+
+    List<Funcionario> findByNome(String nome);
 }
