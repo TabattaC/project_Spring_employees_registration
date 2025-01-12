@@ -2,6 +2,7 @@ package com.projeto.curso.Service;
 
 import com.projeto.curso.domain.Funcionario;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface FuncionarioService {
@@ -12,4 +13,5 @@ public interface FuncionarioService {
     List<Funcionario> buscarTodos();
     List<Funcionario> buscarPorNome(String nome);
     List<Funcionario> buscarPorCargo(Long id);
+    List<Funcionario> buscarPorData(LocalDate entrada, LocalDate saida);
 }

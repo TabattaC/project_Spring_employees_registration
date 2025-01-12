@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
-public class FuncionarioServiceImpl implements FuncionarioService{
+public class FuncionarioServiceImpl implements FuncionarioService {
     @Autowired
     private FuncionarioDao funcionarioDao;
+
     @Override
     @Transactional(readOnly = false)
     public void salvar(Funcionario funcionario) {
@@ -48,5 +52,18 @@ public class FuncionarioServiceImpl implements FuncionarioService{
     @Override
     public List<Funcionario> buscarPorCargo(Long id) {
         return funcionarioDao.findByCargoId(id);
+    }
+
+    @Override
+    public List<Funcionario> buscarPorData(LocalDate entrada, LocalDate saida) {
+        if (entrada != null && saida != null) {
+            return funcionarioDao.findByDataEntradaSaida(entrada, saida);
+        } else if (entrada != null) {
+            return funcionarioDao.findByDataEntrada(entrada);
+        } else if (saida != null) {
+            return funcionarioDao.findByDataSaida(saida);
+        } else {
+            return new ArrayList<>();
+        }
     }
 }
