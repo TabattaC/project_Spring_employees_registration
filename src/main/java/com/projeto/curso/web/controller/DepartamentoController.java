@@ -2,9 +2,11 @@ package com.projeto.curso.web.controller;
 
 import com.projeto.curso.Service.DepartamentoService;
 import com.projeto.curso.domain.Departamento;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +28,10 @@ public class DepartamentoController {
         return "/departamento/lista";
     }
     @PostMapping("/salvar")
-    public String salvar(Departamento departamento, RedirectAttributes attributes){
+    public String salvar(@Valid Departamento departamento, BindingResult result,RedirectAttributes attributes){
+        if(result.hasErrors()){
+            return "/departamento/cadastro";
+        }
         departamentoService.salvar(departamento);
         attributes.addFlashAttribute("success","Departamento inserido com sucesso!");
         return "redirect:/departamentos/cadastrar";
@@ -37,7 +42,10 @@ public class DepartamentoController {
         return "/departamento/cadastro";
     }
     @PostMapping("/editar")
-    public String editar (Departamento departamento, RedirectAttributes attributes){
+    public String editar (@Valid Departamento departamento, BindingResult result,RedirectAttributes attributes){
+        if(result.hasErrors()){
+            return "/departamento/cadastro";
+        }
         departamentoService.editar(departamento);
         attributes.addFlashAttribute("success","Departamento editado com sucesso!");
         return "redirect:/departamentos/cadastrar";
