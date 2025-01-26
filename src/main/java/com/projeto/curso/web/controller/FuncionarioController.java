@@ -5,10 +5,12 @@ import com.projeto.curso.Service.FuncionarioService;
 import com.projeto.curso.domain.Cargo;
 import com.projeto.curso.domain.Funcionario;
 import com.projeto.curso.domain.UF;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,7 +37,10 @@ public class FuncionarioController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(Funcionario funcionario, RedirectAttributes attributes) {
+    public String salvar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return "/funcionario/cadastro";
+        }
         funcionarioService.salvar(funcionario);
         attributes.addFlashAttribute("success", "Funcionario inserido com sucesso!");
         return "redirect:/funcionarios/cadastrar";
@@ -48,7 +53,10 @@ public class FuncionarioController {
     }
 
     @PostMapping("/editar")
-    public String editar(Funcionario funcionario, RedirectAttributes redirectAttributes) {
+    public String editar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "/funcionario/cadastro";
+        }
         funcionarioService.editar(funcionario);
         redirectAttributes.addFlashAttribute("success", "Funcionario atualizado com sucesso!");
         return "redirect:/funcionarios/cadastrar";
@@ -75,9 +83,9 @@ public class FuncionarioController {
 
     @GetMapping("/buscar/data")
     public String getPorData(@RequestParam(value = "entrada", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate entrada,
-                             @RequestParam(value = "saida", required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,
+                             @RequestParam(value = "saida", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,
                              ModelMap model) {
-        model.addAttribute("funcionarios", funcionarioService.buscarPorData(entrada,saida));
+        model.addAttribute("funcionarios", funcionarioService.buscarPorData(entrada, saida));
         return "funcionario/lista";
     }
 
